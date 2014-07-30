@@ -1,0 +1,20 @@
+@import 'mixins';
+// http://davidtheclark.github.io/scut/
+
+@include scut-font-face("RSURegular", "../fonts/RSU_regular");
+@include scut-font-face("RSUBold", "../fonts/RSU_bold");
+@include scut-font-face("RSULight", "../fonts/RSU_light");
+
+@import 'vars';
+
+
+// Bootstrap custom
+@import '../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap-custom';
+
+
+body {
+	padding-top: 0;
+	margin: 0 auto;
+	background-color: yellow;
+	font-family: $fontBrandRegular;
+}

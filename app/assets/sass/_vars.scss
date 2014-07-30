@@ -1,0 +1,35 @@
+$fontBrandLight: "RSULight", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$fontBrandRegular: "RSURegular", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$fontBrandBold: "RSUBold", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+
+$fontRegular: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+
+/*
+|--------------------------------------------------------------------------
+| Overwrite Bootstraps Variables
+|--------------------------------------------------------------------------
+|
+|
+|
+*/
+$brand-primary: #564273;
+$font-size-base: 20px;
+
+
+// layouts
+$sidebar_width: 30%;
+$sidebar_width_sm: 76%;
+$header_height: 60px;
+$color_brand: #423e48;
+$pad: 60px;
+$pad_sm: 20px;
+
+
+// post
+$space_icon: $pad + 22;
+$vspace_icon: 44px;
+$size_icon_genre: 42px;
+$vspace_icon_genre: 48px;
+$hspace_icon_genre: 48px;
+$space_between_post: 34px;
+$vspace_post_sm: 14px;

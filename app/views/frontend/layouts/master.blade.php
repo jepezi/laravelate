@@ -7,10 +7,17 @@
 
     <title>
       @section('title')
-      DudeDB
+      Laravelate
       @show
     </title>
+    
+    @include ('frontend.includes.header')
 
+    @section ('meta')
+    @show
+
+    @section ('head-script')
+    @show
 
 <!-- fav icon -->
   </head>
@@ -21,7 +28,12 @@
   <!-- Content  -->
   @yield('content')
 
-      
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>    
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  
+  <script src="{{ asset('assets/vendor/jquery.infinitescroll.js') }}"></script>
+  
+  <script src="{{ asset('assets/js/app.js') }}"></script>
 
   </body>
 </html>
