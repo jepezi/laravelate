@@ -13,7 +13,14 @@
 
 App::before(function($request)
 {
-	//
+	// delay 1s for ajax req in local mode
+	if (Request::ajax())
+	{
+		if (App::environment('local')) {
+	        sleep(1);
+    	}
+    }
+
 });
 
 
@@ -68,6 +75,16 @@ Route::filter('auth.basic', function()
 Route::filter('guest', function()
 {
 	if (Auth::check()) return Redirect::to('/');
+});
+
+// ajax filter
+Route::filter('ajax', function()
+{
+        // Check ajax req
+        if ( ! Request::ajax())
+        {
+            App::abort(403);
+        }
 });
 
 /*
