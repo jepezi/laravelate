@@ -1,5 +1,5 @@
-@import 'mixins';
-// http://davidtheclark.github.io/scut/
+// @import 'mixins';
+@import '../vendor/scut/src/typography/font-face';
 
 @include scut-font-face("RSURegular", "../fonts/RSU_regular");
 @include scut-font-face("RSUBold", "../fonts/RSU_bold");
@@ -7,9 +7,39 @@
 
 @import 'vars';
 
+/**
+ * #SETTINGS
+ */
+@import "../vendor/inuit-defaults/settings.defaults";
+@import "../vendor/inuit-responsive-settings/settings.responsive";
+
+/**
+ * #TOOLS
+ */
+@import "../vendor/inuit-functions/tools.functions";
+@import "../vendor/inuit-mixins/tools.mixins";
+@import "../vendor/inuit-responsive-tools/tools.responsive";
+
+/**
+ * #GENERIC
+ */
+@import "../vendor/inuit-normalize/generic.normalize";
+@import "../vendor/inuit-reset/generic.reset";
+@import "../vendor/inuit-box-sizing/generic.box-sizing";
+@import "../vendor/inuit-shared/generic.shared";
+
+/**
+ * #BASE
+ */
+@import "../vendor/inuit-page/base.page";
+@import "../vendor/inuit-headings/base.headings";
+@import "../vendor/inuit-lists/base.lists";
+@import "../vendor/inuit-images/base.images";
+
+
 
 // Bootstrap custom
-@import '../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap-custom';
+// @import '../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap-custom';
 
 
 body {
