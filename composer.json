@@ -8,6 +8,9 @@
 		"barryvdh/laravel-debugbar": "dev-master",
 		"intervention/image": "2.*"
 	},
+	"require-dev": {
+	    "way/generators": "2.*"
+	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
