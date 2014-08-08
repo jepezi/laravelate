@@ -14,6 +14,7 @@
 
 {{-- ==========  Content  ========== --}}
 @section('content')
+@include('frontend.includes.noti')
 <h1>Hi there!</h1>
 @if ($app->loggedin)
 <a href="{{ URL::route('session.destroy') }}">Log out</a>
