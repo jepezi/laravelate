@@ -54,7 +54,7 @@ class SessionController extends BaseController {
 
     if (Auth::attempt( ['email' => Input::get('email'), 'password' => Input::get('password')], true ))
     {
-      return Redirect::route('home');
+      return Redirect::intended('/');
     }
 
     return Redirect::route('comeonin')->withInput()
@@ -96,7 +96,7 @@ class SessionController extends BaseController {
 
     Auth::logout();
 
-    return Redirect::route('comeonin')->with('message', 'You have successfully logged out!');
+    return Redirect::route('comeonin')->with('success', 'You have successfully logged out!');
   }
 
 }

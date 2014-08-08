@@ -6,7 +6,7 @@ class HomeController extends BaseController {
 	{
 		if (Auth::user())
 	    {
-	      return Redirect::route('home');
+	      return Redirect::route('home')->with('success', 'You are already logged in!');
 	    }
 
 	    return View::make('frontend.home.comeonin');
