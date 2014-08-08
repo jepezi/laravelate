@@ -13,3 +13,4 @@ app/config/packages/way/generators
 app/templates
 public/packages/barryvdh
 public/packages/maximebf
+app/assets/vendor
