@@ -124,6 +124,9 @@ return array(
 
 		'Intervention\Image\ImageServiceProvider',
 
+		'Spring\SpringServiceProvider',
+		'Spring\Repositories\RepositoryServiceProvider',
+
 	),
 
 	/*
