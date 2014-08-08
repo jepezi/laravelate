@@ -5,20 +5,20 @@ use Spring\Inventories\UserInventory;
 
 class AuthController extends BaseController {
 
-	protected $repository;
+	protected $user_repository;
 
-	public function __construct(UserInterface $repository, UserInventory $inventory)
+	public function __construct(UserInterface $user_repository, UserInventory $user_inventory)
 	{
 		// $this->beforeFilter('auth');
-		$this->repository = $repository;
-		$this->inventory = $inventory;
+		$this->user_repository = $user_repository;
+		$this->user_inventory = $user_inventory;
 	}
 
-	public function postSignup()
+	public function store()
     {
-    	$user = $this->inventory->create(Input::all());
+    	$user = $this->user_inventory->create(Input::all());
 
-    	if(! $user) return Redirect::back()->withInput()->withErrors($this->inventory->errors());
+    	if(! $user) return Redirect::back()->withInput()->withErrors($this->user_inventory->errors());
 
     	Auth::login($user, true);
 
