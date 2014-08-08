@@ -20,4 +20,4 @@ Route::get('logout',         ['uses' => 'SessionController@destroy',   'as' => '
 
 
 /*==========  Come on in (login or signup)  ==========*/
-Route::get('comeonin',		['as' => 'comeonin', 	'uses' => 'HomeController@comeonin'] );
+Route::get('comeonin',		['before' => 'guest', 'as' => 'comeonin', 	'uses' => 'HomeController@comeonin'] );
