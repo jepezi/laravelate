@@ -1,9 +1,9 @@
 // @import 'mixins';
 @import '../vendor/scut/src/typography/font-face';
 
-@include scut-font-face("RSURegular", "../fonts/RSU_regular");
-@include scut-font-face("RSUBold", "../fonts/RSU_bold");
-@include scut-font-face("RSULight", "../fonts/RSU_light");
+// @include scut-font-face("RSURegular", "../fonts/RSU_regular");
+// @include scut-font-face("RSUBold", "../fonts/RSU_bold");
+// @include scut-font-face("RSULight", "../fonts/RSU_light");
 
 @import 'vars';
 
@@ -12,6 +12,8 @@
  */
 @import "../vendor/inuit-defaults/settings.defaults";
 @import "../vendor/inuit-responsive-settings/settings.responsive";
+@import "settings.global";
+@import "settings.colors";
 
 /**
  * #TOOLS
@@ -19,6 +21,9 @@
 @import "../vendor/inuit-functions/tools.functions";
 @import "../vendor/inuit-mixins/tools.mixins";
 @import "../vendor/inuit-responsive-tools/tools.responsive";
+@import "tools.aliases"; // font-size, spacing
+@import "tools.mixins"; // vendor
+
 
 /**
  * #GENERIC
@@ -36,6 +41,46 @@
 @import "../vendor/inuit-lists/base.lists";
 @import "../vendor/inuit-images/base.images";
 
+/**
+ * #OBJECTS
+ */
+@import "objects.wrappers";
+
+$inuit-btn-background:      		$color-btn;
+$inuit-btn-radius:          		3px;
+$inuit-btn-border-width:    		2px;
+$inuit-enable-btn--small:   		true;
+$inuit-enable-btn--full:    		true;
+@import "../vendor/inuit-buttons/objects.buttons";
+
+$inuit-enable-layout--middle:   	true;
+$inuit-enable-layout--bottom:   	true;
+$inuit-enable-layout--large:    	true;
+@import "../vendor/inuit-layout/objects.layout";
+
+@import "../vendor/inuit-box/objects.box";
+@import "../vendor/inuit-media/objects.media";
+
+$inuit-enable-flag--rev:        	true;
+$inuit-enable-flag--responsive: 	true;
+$inuit-flag-collapse-at:        	479px !default;
+@import "../vendor/inuit-flag/objects.flag";
+
+
+/**
+ * #TRUMPS
+ */
+@import "../vendor/inuit-clearfix/trumps.clearfix";
+
+$inuit-use-fractions:   			false;
+@import "../vendor/inuit-widths/trumps.widths";
+@import "trumps.widths-responsive";
+
+/**
+* #Component
+*/
+@import "components.form";
+
 
 
 // Bootstrap custom
@@ -43,8 +88,31 @@
 
 
 body {
-	padding-top: 0;
-	margin: 0 auto;
-	background-color: yellow;
-	font-family: $fontBrandRegular;
+	// padding-top: 0;
+	// margin: 0 auto;
+
+	// font-family: $fontBrandRegular;
+
+	font-family: 'Lato', sans-serif;
+}
+
+
+/* show-password checkbox */
+form span label.show-password
+{
+	margin:8px 0 0 1px;
+}
+form span label.show-password input
+{
+	cursor:default;
+	position:relative;
+	top:-1px;
+}
+form span label.show-password span
+{
+	white-space:nowrap;
+	font-size:0.95em;
+	margin:0 0 0 8px;
+	padding:0 15px 0 0;
+	// background:url(alert10x10.png) no-repeat 100% 60%;
 }

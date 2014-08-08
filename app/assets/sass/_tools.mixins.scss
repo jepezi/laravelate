@@ -1,0 +1,13 @@
+// Proper vendor prefixes are created just by
+// passing a property value and size value.
+//
+//  `@include vendor(border-radius, 4px);`
+//
+//
+@mixin vendor($property, $value...) {
+  -webkit-#{$property}: $value;
+  -moz-#{$property}: $value;
+  -ms-#{$property}: $value;
+  -o-#{$property}: $value;
+  #{$property}: $value;
+}
