@@ -5,7 +5,7 @@
 /*==========  Home  ==========*/
 Route::get( '/', 			['as' => 'home', 		'uses' => 'HomeController@index'] );
 
-Route::post('signup', 		['as' => 'signup', 		'uses' => 'AuthController@postSignup'] );
+Route::post('signup', 		['as' => 'signup', 		'uses' => 'AuthController@store'] );
 
 /**
  * Authentication
