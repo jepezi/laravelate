@@ -9,3 +9,7 @@ composer.lock
 Thumbs.db
 app/assets/vendor/bootstrap-sass-official
 app/assets/vendor/jquery
+app/config/packages/way/generators
+app/templates
+public/packages/barryvdh
+public/packages/maximebf
