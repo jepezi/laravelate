@@ -19,24 +19,42 @@ class UserInventory extends AbstractInventory implements Inventory {
   public function update(array $data)
   {
 
-    if (! $this->isValid('create', $data))
+    if (! $this->isValid('update', $data))
     {
       return false;
     }
 
     return $this->repository->update($data);
   }
-
-  
-  public function create(array $data)
+  /*
+  |--------------------------------------------------------------------------
+  | Create
+  |--------------------------------------------------------------------------
+  | 
+  | observer is authcontroller passed from controller itself, 
+  | notify back to controller for success or invalid data
+  | 
+  */
+  public function create($observer, array $data)
   {
 
     if (! $this->isValid('create', $data))
     {
-      return false;
+      // return false;
+      return $observer->invalid($this->errors());
     }
 
-    return $this->repository->create($data);
+    // return $this->repository->create($data);
+    return $this->createValidModel($observer, $data);
+  }
+
+  private function createValidModel($observer, $data)
+  {
+    $model = $this->repository->create($data);
+
+    if (! $model) return $observer->invalid(['error' => 'Unknown error. Please try again.']);
+
+    return $observer->userCreated($model);
   }
 
 }
