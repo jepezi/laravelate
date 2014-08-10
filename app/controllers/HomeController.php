@@ -4,7 +4,7 @@ class HomeController extends BaseController {
 
 	public function comeonin()
 	{
-	    return View::make('frontend.home.comeonin');
+	    return View::make('frontend.auth.comeonin');
 	}
 
 	public function index()
