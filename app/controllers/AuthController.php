@@ -6,6 +6,7 @@ use Spring\Inventories\UserInventory;
 class AuthController extends BaseController {
 
 	protected $user_repository;
+	protected $user_inventory;
 
 	public function __construct(UserInterface $user_repository, UserInventory $user_inventory)
 	{
@@ -16,13 +17,9 @@ class AuthController extends BaseController {
 
 	public function store()
     {
-    	$user = $this->user_inventory->create(Input::all());
 
-    	if(! $user) return Redirect::back()->withInput()->withErrors($this->user_inventory->errors());
+    	return $this->user_inventory->create($this, Input::all());
 
-    	Auth::login($user, true);
-
-    	return Redirect::route('home');
     }
 
 	
@@ -30,6 +27,31 @@ class AuthController extends BaseController {
 	public function index()
 	{
 		
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Observer callback method
+	|--------------------------------------------------------------------------
+	| 
+	| Called from User Inventory
+	| 
+	*/
+
+	/*==========  userCreated callback  ==========*/
+	public function userCreated($user)
+	{
+
+		Auth::login($user, true);
+		
+		return Redirect::route('account.complete');
+	}
+
+	/*==========  invalid - there was any validation error  ==========*/
+	public function invalid($errors)
+	{
+
+		return Redirect::back()->withInput()->withErrors($errors);
 	}
 
 
