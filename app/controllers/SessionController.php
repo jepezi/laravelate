@@ -45,7 +45,7 @@ class SessionController extends BaseController {
   }
 
   /**
-   * Accept the POST request and create a new session
+   * Accept the POST request and create a new session (login)
    *
    * @return Redirect
    */

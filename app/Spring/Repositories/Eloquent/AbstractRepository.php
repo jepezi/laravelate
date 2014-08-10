@@ -58,6 +58,7 @@ abstract class AbstractRepository {
   {
 
     $model = $this->model->find($data['id']);
+
     $model->fill($data);
     
     if ($model->save())
