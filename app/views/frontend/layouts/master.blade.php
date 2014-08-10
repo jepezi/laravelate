@@ -23,7 +23,7 @@
   </head>
 
   <body>
-  
+  @include ('frontend.includes.nav')
   <div class="wrapper">
     <!-- Content  -->
     @yield('content')
