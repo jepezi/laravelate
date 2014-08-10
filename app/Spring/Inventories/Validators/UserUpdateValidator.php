@@ -11,10 +11,13 @@ class UserUpdateValidator extends LaravelValidator implements Validable {
    * @var array
    */
   protected $rules = [
-    'email' => 'required|email|unique:users',
+    'email' => 'sometimes|required|email|unique:users,email,{id}',
     'first_name' => 'required',
     'last_name' => 'required',
-    'password' => 'required|min:6'
+    'message' => 'max: 150',
+    'password' => 'sometimes|required|min:6',
+    'website' => 'url',
+    'twitter' => 'url'
   ];
 
 
