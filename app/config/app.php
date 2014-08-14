@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'ISX9J1bzcSIXcEkhaDuEt7rIPCvHGkzi',
+	'key' => 'SEsRtGzi1SyZLml2W9AKr8exrmVjaReD',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -122,10 +122,13 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+		'Barryvdh\Debugbar\ServiceProvider',
+
 		'Intervention\Image\ImageServiceProvider',
 
 		'Spring\SpringServiceProvider',
 		'Spring\Repositories\RepositoryServiceProvider',
+		'Spring\Uploaders\UploaderServiceProvider',
 
 	),
 
@@ -193,6 +196,8 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
+
+		'Debugbar' => 'Barryvdh\Debugbar\Facade',
 
 		'Image' => 'Intervention\Image\Facades\Image'
 
