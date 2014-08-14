@@ -80,7 +80,7 @@ $inuit-use-fractions:   			false;
 * #Component
 */
 @import "components.form";
-
+@import "components.progressbar";
 
 
 // Bootstrap custom
@@ -96,8 +96,63 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
+/* ---------------- list dl ---------------- */
+$dl-row-padding: 12px;
+$dl-border-color: #aaa;
+dl.table-display
+{
+  width: 80%;
+  margin: 1em 0;
+  padding: 0;
+  border-bottom: 1px solid $dl-border-color;
+  dt {
+    display: inline-block;
+    width: 30%;
+    margin: 0;
+    padding: $dl-row-padding;
+    border-top: 1px solid $dl-border-color;
+    font-weight: bold;
+  }
+  dd {
+    display: inline-block;
+    width: 70%;
+    margin: 0;
+    padding: $dl-row-padding;
+    border-top: 1px solid $dl-border-color;
+  }
+}
 
-/* show-password checkbox */
+/* ---------------- fileupload ---------------- */
+#error-upload {
+	color: red;
+}
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
+}
+
+/* ---------------- show-password checkbox ---------------- */
 form span label.show-password
 {
 	margin:8px 0 0 1px;
