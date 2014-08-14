@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"barryvdh/laravel-debugbar": "dev-master",
-		"intervention/image": "2.*"
+		"intervention/image": "2.*",
+		"league/oauth2-client": "~0.3"
 	},
 	"require-dev": {
 	    "way/generators": "2.*"
