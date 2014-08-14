@@ -20,7 +20,7 @@ return array(
 	),
 
 	'mandrill' => array(
-		'secret' => '',
+		'secret' => $_ENV['MANDRILL_API_KEY'],
 	),
 
 	'stripe' => array(
