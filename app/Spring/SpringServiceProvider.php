@@ -5,6 +5,11 @@ use Illuminate\Support\ServiceProvider;
 class SpringServiceProvider extends ServiceProvider 
 {
 
+  public function boot()
+  {
+    require __DIR__ . '/form_macros.php';
+  }
+
   public function register()
   {
     $this->registerSpring();
