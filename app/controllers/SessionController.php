@@ -12,6 +12,7 @@
 | - implement repo
 | 
 */
+use Spring\Managers\AuthManager;
 
 class SessionController extends BaseController {
 
@@ -23,74 +24,62 @@ class SessionController extends BaseController {
   protected $manager;
 
   
-  // public function __construct(Manager $manager)
-  // {
-  //   $this->manager = $manager;
-  // }
-
-  /**
-   * Display the form to allow a user to log in
-   *
-   * @return View
-   */
-  public function create()
+  public function __construct(AuthManager $manager)
   {
-    // if (Auth::user())
-    // {
-    //   return Redirect::route('home.index');
-    // }
-
-    // $this->layout->title = "Sign in";
-    // $this->layout->nest('content', 'session.create');
+    $this->manager = $manager;
   }
 
-  /**
-   * Accept the POST request and create a new session (login)
-   *
-   * @return Redirect
-   */
+
+  /*
+  |--------------------------------------------------------------------------
+  | Login
+  |--------------------------------------------------------------------------
+  | 
+  | Store session
+  | 
+  */
   public function store()
   {
 
-    if (Auth::attempt( ['email' => Input::get('email'), 'password' => Input::get('password')], true ))
-    {
-      return Redirect::intended('/');
-    }
+    return $this->manager->attempt( $this, ['email_login' => Input::get('email_login') , 'password_login' => Input::get('password_login')] );
 
-    return Redirect::route('comeonin')->withInput()
-                                            ->with('error', 'Your email or password was incorrect, please try again!');
   }
 
-  /**
-   * Authorise an authentication request
-   *
-   * @return Redirect
-   */
-  public function authorise($provider)
+
+  /*
+  |--------------------------------------------------------------------------
+  | Observer methods
+  |--------------------------------------------------------------------------
+  | 
+  | 
+  | 
+  */
+  public function userNotFound($errors)
   {
-    // try
-    // {
-    //   $provider = $this->manager->get($provider);
-
-    //   $credentials = $provider->getTemporaryCredentials();
-
-    //   Session::put('credentials', $credentials);
-    //   Session::save();
-
-    //   return $provider->authorize($credentials);
-    // }
-
-    // catch(Exception $e)
-    // {
-    //   return App::abort(404);
-    // }
+    return Redirect::route('comeonin')->withInput()
+                                            ->withErrors($errors);
   }
 
-  /**
-   * Destroy an existing session
-   *
-   * @return Redirect
-   */
+  public function userLoggedin()
+  {
+    return Redirect::intended('/');
+  }
+
+  public function invalid($errors)
+  {
+    return Redirect::route('comeonin')->withInput()
+                                            ->withErrors($errors);
+  }
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | Logout
+  |--------------------------------------------------------------------------
+  | 
+  | Destroy session
+  | 
+  */
   public function destroy()
   {
 

@@ -9,11 +9,21 @@ use Spring\Repositories\Eloquent\UserRepository;
 //inventory
 use Spring\Inventories\UserInventory;
 // validator
-use Spring\Inventories\Validators\UserCreateValidator;
-use Spring\Inventories\Validators\UserUpdateValidator;
+use Spring\Validators\Validator\UserCreateValidator;
+use Spring\Validators\Validator\UserUpdateValidator;
+use Spring\Validators\Validator\UserChangePasswordValidator;
+// event handlers
+use Spring\Events\UserEventHandler;
 
-class RepositoryServiceProvider extends ServiceProvider 
+class RepositoryServiceProvider extends ServiceProvider
 {
+
+  public function boot()
+  {
+
+    $this->app->events->subscribe(new UserEventHandler);
+
+  }
 
   public function register()
   {
@@ -36,8 +46,6 @@ class RepositoryServiceProvider extends ServiceProvider
     {
 
       $repository = new UserRepository( new User );
-      // $repository->registerValidator('create', new UserCreateValidator($app['validator']));
-      // $repository->registerValidator('update', new UserUpdateValidator($app['validator']));
 
       //cache
 
@@ -53,6 +61,7 @@ class RepositoryServiceProvider extends ServiceProvider
       $inventory = new UserInventory( $app->make('Spring\Repositories\UserInterface') );
       $inventory->registerValidator( 'create' , new UserCreateValidator($app['validator']) );
       $inventory->registerValidator( 'update', new UserUpdateValidator($app['validator']) );
+      $inventory->registerValidator( 'changepassword', new UserChangePasswordValidator($app['validator']) );
       
       return $inventory;
 

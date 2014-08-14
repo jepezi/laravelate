@@ -14,7 +14,7 @@
 use Spring\Repositories\UserInterface;
 use Spring\Inventories\UserInventory;
 
-class AccountController extends BaseController {
+class AccountController extends AuthorisedController {
 
   // public function __construct(Manager $manager)
   // {
@@ -26,6 +26,8 @@ class AccountController extends BaseController {
 
   public function __construct(UserInterface $user_repository, UserInventory $user_inventory)
   {
+    parent::__construct();
+    
     $this->user_repository = $user_repository;
     $this->user_inventory = $user_inventory;
   }
@@ -37,29 +39,21 @@ class AccountController extends BaseController {
    */
   public function index()
   {
-
+    return View::make('frontend.account.index');
   }
 
+
+  /*
+  |--------------------------------------------------------------------------
+  | Edit Account
+  |--------------------------------------------------------------------------
+  | 
+  | 
+  | 
+  */
   public function edit()
   {
     return View::make('frontend.account.edit');
-  }
-
-  public function complete()
-  {
-    return View::make('frontend.account.complete');
-  }
-
-  public function updateComplete()
-  {
-
-    $SpringApp = \App::make('SpringApp');
-
-    $user = $this->user_inventory->update( array_merge(['id' => $SpringApp->user->id], Input::all()) );
-
-    if(! $user) return Redirect::route('account.complete')->withInput()->withErrors($this->user_inventory->errors());
-
-    return Redirect::route('home')->with('success', 'Your account has been created! You can edit your account information anytime. Enjoy!');
   }
 
   public function update()
@@ -71,38 +65,84 @@ class AccountController extends BaseController {
 
     if(! $user) return Redirect::route('account.edit')->withInput()->withErrors($this->user_inventory->errors());
 
-    return Redirect::route('account.edit')->with('success', 'Your account has been updated!');
+    return Redirect::route('account.index')->with('success', 'Your account has been updated!');
   }
 
-  /**
-   * Accept the POST request and create a new session (login)
-   *
-   * @return Redirect
-   */
-  public function store()
+
+  /*
+  |--------------------------------------------------------------------------
+  | Complete account info 
+  |--------------------------------------------------------------------------
+  | 
+  | - Complete
+  | - Complete Social
+  | 
+  */
+
+  /*==========  Show complete form after created new account from OAuth Connect (authorise)  ==========*/
+  public function completeSocial()
+  {
+    return View::make('frontend.account.completeSocial');
+  }
+
+  /*==========  Show complete form after fast signup   ==========*/
+  public function complete()
+  {
+    return View::make('frontend.account.complete');
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Update Complete
+  |--------------------------------------------------------------------------
+  | 
+  | Since we don't care what's in the Complete and Complete Social form, 
+  | We update user info here.
+  | This is last step of Signup flow.
+  |
+  | - We fire event here.
+  |
+  */
+  public function updateComplete()
   {
 
-    if (Auth::attempt( ['email' => Input::get('email'), 'password' => Input::get('password')], true ))
-    {
-      return Redirect::intended('/');
-    }
+    $SpringApp = \App::make('SpringApp');
 
-    return Redirect::route('comeonin')->withInput()
-                                            ->with('error', 'Your email or password was incorrect, please try again!');
+    $user = $this->user_inventory->update( array_merge(['id' => $SpringApp->user->id], Input::all()) );
+
+    if(! $user) return Redirect::back()->withInput()->withErrors($this->user_inventory->errors());
+
+    // fire event for email, ...
+    Event::fire('user.created', [$user]);
+
+    return Redirect::route('home')->with('success', 'Your account has been created! You can edit your account information anytime. Enjoy!');
   }
 
 
-  /**
-   * Destroy an existing session
-   *
-   * @return Redirect
-   */
-  public function destroy()
+
+  /*
+  |--------------------------------------------------------------------------
+  | Change Password
+  |--------------------------------------------------------------------------
+  | 
+  | 
+  | 
+  */
+  public function getChangePassword()
   {
-
-    Auth::logout();
-
-    return Redirect::route('comeonin')->with('success', 'You have successfully logged out!');
+    return View::make('frontend.account.change-password');
   }
+
+  public function postChangePassword()
+  {
+    $SpringApp = \App::make('SpringApp');
+
+    $user = $this->user_inventory->changepassword( array_merge(['id' => $SpringApp->user->id], Input::all()) );
+
+    if(! $user) return Redirect::back()->withInput()->withErrors($this->user_inventory->errors());
+
+    return Redirect::back()->with('success', 'Your password has been changed!');
+  }
+
 
 }
