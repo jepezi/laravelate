@@ -205,9 +205,10 @@
                     <td style="text-align:left; color: #6f6f6f;">
                     <br>
                     Hi {{{ $user->first_name.' '.$user->last_name }}}<br><br>
-                    Welcome to our website. You can edit your account information anytime at <a href="#">this link</a><br><br>
+                    Welcome to our website. You can manage your account information anytime at <a href="{{ route('account.index') }}">this link</a><br><br>
                     Thanks for joining us!<br>
                     Awesome Inc <br>
+                    </td>
                   </tr>
                 </table>
                 </center>
