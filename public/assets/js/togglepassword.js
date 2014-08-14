@@ -1,2 +1,1 @@
-new ShowPasswordCheckbox(document.getElementById("toggle-password-login"));
-new ShowPasswordCheckbox(document.getElementById("toggle-password-signup"));
+new ShowPasswordCheckbox(document.getElementById("toggle-password-login")),new ShowPasswordCheckbox(document.getElementById("toggle-password-signup"));
