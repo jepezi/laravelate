@@ -5,7 +5,39 @@
 /*==========  Home  ==========*/
 Route::get( '/', 			['as' => 'home', 		'uses' => 'HomeController@index'] );
 
-Route::post('signup', 		['as' => 'signup', 		'uses' => 'AuthController@store'] );
+
+
+/*
+|--------------------------------------------------------------------------
+| Ajax
+|--------------------------------------------------------------------------
+| 
+| 
+| 
+*/
+Route::group(array('prefix' => 'ajax'), function()
+{
+    Route::post('uploadAndSaveAvatar', 'UploadController@uploadAndSaveAvatar');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Auth
+| Signup
+|--------------------------------------------------------------------------
+| 
+| Authorise by social (Social connect)
+| 
+*/
+Route::post('signup', 				['as' => 'signup', 						'uses' => 'AuthController@store'] );
+
+Route::group(array('prefix' => 'auth'), function()
+{
+    // social signin
+    Route::get('{provider}', 		['as' => 'authenticate.authorise', 		'uses' => 'AuthController@authorise'] );
+});
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,40 +47,55 @@ Route::post('signup', 		['as' => 'signup', 		'uses' => 'AuthController@store'] )
 | edit or do anything with account
 | 
 */
-Route::group(['prefix' => 'account',	'before' => 'auth'], function()
+Route::group(['prefix' => 'account'], function()
 {
 
-        # Account Dashboard
-        Route::get('/', 		['as' => 'account.index', 			'uses' => 'AccountController@index'] );
-        
-        # Complete account after newly signup
-        Route::get('complete', 		['as' => 'account.complete', 			'uses' => 'AccountController@complete'] );
-        Route::put('complete', 		'AccountController@updateComplete' );
+	# Account index
+	Route::get('/', 				['as' => 'account.index', 				'uses' => 'AccountController@index'] );
 
-        # Edit account
-        Route::get('edit', 		['as' => 'account.edit', 			'uses' => 'AccountController@edit'] );
-        Route::put('edit', 		'AccountController@update' );
+	# Complete account after newly signup
+	Route::get('complete', 			['as' => 'account.complete', 			'uses' => 'AccountController@complete'] );
+	Route::post('complete', 		'AccountController@updateComplete' );
 
-        # Change Password
-        // Route::get('change-password', array('as' => 'change-password', 'uses' => 'ChangePasswordController@getIndex'));
-        // Route::post('change-password', 'ChangePasswordController@postIndex');
+	# Complete account after social connect (authorise)
+	Route::get('completeSocial', 	['as' => 'account.completeSocial', 		'uses' => 'AccountController@completeSocial'] );
+	Route::post('completeSocial', 	'AccountController@updateComplete' );
 
-        # Change Email
-        // Route::get('change-email', array('as' => 'change-email', 'uses' => 'ChangeEmailController@getIndex'));
-        // Route::post('change-email', 'ChangeEmailController@postIndex');
+	# Edit account
+	Route::get('edit', 				['as' => 'account.edit', 				'uses' => 'AccountController@edit'] );
+	Route::post('edit', 			'AccountController@update' );
+
+	// Change Password
+	Route::get('change_password', 	['as' => 'account.change_password', 	'uses' => 'AccountController@getChangePassword']);
+    Route::post('change_password', 	'AccountController@postChangePassword');
+
+    // Forgot password
+    // Route::get('forgot_password', 	['as' => 'account.forgot_password', 	'uses' => 'AccountController@getForgotPassword']);
+    // Route::post('forgot_password', 	'AccountController@postForgotPassword');
 
 });
 
-/**
- * Authentication
- *
- * Allow a user to log in and log out of the application
- */
-// disble login page in favor of comeonin
-// Route::get('login',             ['uses' => 'SessionController@create',    'as' => 'session.create']); 
-Route::get('login/{provider}',  ['uses' => 'SessionController@authorise', 	'as' => 'session.authorise']);
-Route::post('login',            ['uses' => 'SessionController@store',     	'as' => 'session.store']);
-Route::get('logout',         	['uses' => 'SessionController@destroy',   	'as' => 'session.destroy']);
+/*
+|--------------------------------------------------------------------------
+| Password Reminder
+|--------------------------------------------------------------------------
+| 
+| 
+| 
+*/
+Route::controller('password', 'RemindersController');
+
+/*
+|--------------------------------------------------------------------------
+| Session
+|--------------------------------------------------------------------------
+| 
+| Log in and log out
+| 
+*/
+// no login route in favor of comeonin
+Route::post('login',            ['as' => 'session.store', 		'uses' => 'SessionController@store'] );
+Route::get('logout',         	['as' => 'session.destroy',		'uses' => 'SessionController@destroy'] );
 
 
 /*==========  Come on in (login or signup)  ==========*/
