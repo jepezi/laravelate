@@ -68,4 +68,12 @@ return array(
 
 	),
 
+	'providers' => array(
+		'Facebook' => array(
+			'identifier'    => $_ENV['FB_ID'],
+			'secret'        => $_ENV['FB_SECRET'],
+			'callback_uri'  => $_ENV['FB_CALLBACK_URI']
+		)
+	)
+
 );
