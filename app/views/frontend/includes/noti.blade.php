@@ -22,7 +22,7 @@
 @if ( $errors->count() > 0 )
 <div class="alert alert-danger alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <h5>There were errors during registration:</h5>
+  <strong>There were errors.</strong>
                              @foreach($errors->all('<li>:message</li>') as $message)
                                 {{$message}}
                              @endforeach
