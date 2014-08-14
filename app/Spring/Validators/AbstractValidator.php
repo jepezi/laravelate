@@ -23,6 +23,8 @@ abstract class AbstractValidator {
    */
   protected $rules = array();
 
+  protected $messages = array();
+
   /**
    * Validation errors
    *

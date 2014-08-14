@@ -1,4 +1,4 @@
-<?php namespace Spring\Inventories\Validators;
+<?php namespace Spring\Validators\Validator;
 
 use Spring\Validators\Validable;
 use Spring\Validators\LaravelValidator;
@@ -13,6 +13,11 @@ class UserCreateValidator extends LaravelValidator implements Validable {
   protected $rules = [
     'email' => 'required|email|unique:users',
     'password' => 'required|min:6'
+  ];
+
+  protected $messages = [
+    'email.email' => 'Email you entered seems to be wrong email format. Please try again.',
+    'password.min' => 'Password has to be at least 6 characters.'
   ];
 
 

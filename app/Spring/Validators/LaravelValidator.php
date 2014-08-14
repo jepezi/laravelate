@@ -48,6 +48,11 @@ abstract class LaravelValidator extends AbstractValidator {
     return $rules;
   }
 
+  public function getMessages()
+  {
+    return $this->messages ?: [];
+  }
+
   /**
    * Pass the data and the rules to the validator
    *
@@ -57,14 +62,14 @@ abstract class LaravelValidator extends AbstractValidator {
   {
     $rules = $this->replace();
 
-    $validator = $this->validator->make($this->data, $rules);
+    $validator = $this->validator->make( $this->data, $rules, $this->getMessages() );
 
     if( $validator->passes() )
     {
       return true;
     }
 
-    $this->errors = $validator->messages();
+    $this->errors = $validator->errors();
   }
 
 }
