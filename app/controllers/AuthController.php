@@ -15,20 +15,20 @@ class AuthController extends BaseController {
 		$this->user_inventory = $user_inventory;
 	}
 
-	/*==========  Signup  ==========*/
+	/*
+	|--------------------------------------------------------------------------
+	| Sign up
+	|--------------------------------------------------------------------------
+	| 
+	| 
+	| 
+	*/
 	public function store()
     {
 
     	return $this->user_inventory->create($this, Input::all());
 
     }
-
-	
-
-	public function index()
-	{
-		
-	}
 
 	/*
 	|--------------------------------------------------------------------------
@@ -43,6 +43,8 @@ class AuthController extends BaseController {
 	public function authorise($provider)
 	{
 		$class = "League\OAuth2\Client\Provider\\" . $provider;
+
+		if (! class_exists($class)) App::abort(401);
 
 		$provider = new $class(array(
 		    'clientId'  	=>  Config::get('auth.providers.' . $provider . '.identifier'),
@@ -69,7 +71,6 @@ class AuthController extends BaseController {
 
 	}
 
-
 	/*
 	|--------------------------------------------------------------------------
 	| Observer callback method from signup flow
@@ -90,18 +91,25 @@ class AuthController extends BaseController {
 	/*==========  userCreated callback  ==========*/
 	public function userCreated($user, $fromSocial)
 	{
-
 		Auth::login($user, true);
 
-		if(! $fromSocial) return Redirect::route('account.complete');
+		// check activation config
+		// if no activation, we just fire user.signedup to finish the signup process
+		// for now, we only send welcome email.
+		if (! Config::get('auth.activate'))
+		{
+			Event::fire('user.signedup', [$user]);
+			return Redirect::route('home')->with('success', Lang::get('auth.signup.success'));
+		}
 		
-		return Redirect::route('account.completeSocial');
+		// activation needed. 
+		Event::fire('user.activate', [$user]);
+		return Redirect::route('activate');
 	}
 
 	/*==========  invalid - there was some validation error  ==========*/
 	public function invalid($errors)
 	{
-
 		return Redirect::back()->withInput()->withErrors($errors);
 	}
 

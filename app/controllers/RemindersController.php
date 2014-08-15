@@ -21,7 +21,7 @@ class RemindersController extends Controller {
 	{
 		switch ( $response = Password::remind( Input::only('email'), function($message)
 {
-    $message->subject('Password Reset Instruction from Spring');
+    $message->subject(Lang::get('auth.passwordreset.emailsubject'));
 } ) )
 		{
 			case Password::INVALID_USER:
@@ -71,7 +71,7 @@ class RemindersController extends Controller {
 				return Redirect::back()->with('error', Lang::get($response));
 
 			case Password::PASSWORD_RESET:
-				return Redirect::route('comeonin')->with('success', 'Congrats! You can login with your new password.');
+				return Redirect::route('comeonin')->with('success', Lang::get('auth.passwordreset.success'));
 		}
 	}
 

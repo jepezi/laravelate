@@ -68,57 +68,25 @@ class AccountController extends AuthorisedController {
     return Redirect::route('account.index')->with('success', 'Your account has been updated!');
   }
 
-
   /*
   |--------------------------------------------------------------------------
-  | Complete account info 
+  | Activate (later)
   |--------------------------------------------------------------------------
   | 
-  | - Complete
-  | - Complete Social
+  | 
   | 
   */
-
-  /*==========  Show complete form after created new account from OAuth Connect (authorise)  ==========*/
-  public function completeSocial()
+  public function activate()
   {
-    return View::make('frontend.account.completeSocial');
+    return View::make('frontend.account.activate');
   }
-
-  /*==========  Show complete form after fast signup   ==========*/
-  public function complete()
+  public function resendcode()
   {
-    return View::make('frontend.account.complete');
+    $user = \App::make('SpringApp')->user;
+    // activation needed. 
+    Event::fire('user.activate', [$user]);
+    return Redirect::route('activate.resent');
   }
-
-  /*
-  |--------------------------------------------------------------------------
-  | Update Complete
-  |--------------------------------------------------------------------------
-  | 
-  | Since we don't care what's in the Complete and Complete Social form, 
-  | We update user info here.
-  | This is last step of Signup flow.
-  |
-  | - We fire event here.
-  |
-  */
-  public function updateComplete()
-  {
-
-    $SpringApp = \App::make('SpringApp');
-
-    $user = $this->user_inventory->update( array_merge(['id' => $SpringApp->user->id], Input::all()) );
-
-    if(! $user) return Redirect::back()->withInput()->withErrors($this->user_inventory->errors());
-
-    // fire event for email, ...
-    Event::fire('user.created', [$user]);
-
-    return Redirect::route('home')->with('success', 'Your account has been created! You can edit your account information anytime. Enjoy!');
-  }
-
-
 
   /*
   |--------------------------------------------------------------------------
