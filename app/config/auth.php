@@ -68,6 +68,8 @@ return array(
 
 	),
 
+	'activate'	=> true,
+
 	'providers' => array(
 		'Facebook' => array(
 			'identifier'    => $_ENV['FB_ID'],
