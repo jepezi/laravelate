@@ -64,19 +64,20 @@ class UserInventory extends AbstractInventory implements Inventory {
   | 
   */
   public function authOrCreate($observer, $auth, $user_data, $token)
+  {
+    // check if user was authed before from DB (being a member from clicking Login with XXX)
+    // if yes, $auth return user model
+    // we just update user token
+    if($auth)
     {
-      // check if user was authed before from DB (being a member from clicking Login with XXX)
-      // if yes, $auth return user model
-      // we just update user token
-      if($auth)
-      {
-        return $this->updateUserToken($observer, $auth, $token);
-      }
+      return $this->updateUserToken($observer, $auth, $token);
+    }
 
-      // if no, we create new user from provider's data
-      // and then present them the edit form to check if modification needed
-      return $this->createUserFromSocialData($observer, $user_data, $token);
-    }  
+    // if no, we create new user from provider's data
+    // and then present them the edit form to check if modification needed
+    return $this->createUserFromSocialData($observer, $user_data, $token);
+  }
+
   /*
   |--------------------------------------------------------------------------
   | Create - public
@@ -96,7 +97,7 @@ class UserInventory extends AbstractInventory implements Inventory {
     }
 
     // return $this->repository->create($data);
-    return $this->createValidModel($observer, $data);
+    return $this->createValidModel($observer, $data, false);
   }
 
   /*
@@ -166,17 +167,18 @@ class UserInventory extends AbstractInventory implements Inventory {
     return $observer->userAuthed($user);
   }
 
+
   private function createValidModel($observer, $data, $fromSocial = false)
   {
-    $model = $this->repository->create($data);
+    $user = $this->repository->create($data);
 
-    if (! $model) 
+    if (! $user)
     {
       $this->errors->add('error', 'Unknown error. Please try again.');
       return $observer->invalid( $this->errors() );
     }
 
-    return $observer->userCreated($model, $fromSocial);
+    return $observer->userCreated($user, $fromSocial);
   }
 
 }
