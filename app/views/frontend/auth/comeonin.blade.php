@@ -31,7 +31,6 @@ Come on in -
 
 			{{ Form::passwordField('password_login', ['id' => 'toggle-password-login', 'placeholder' => 'Set your password'], 'Password') }}
 
-
 			<input type="submit" value="Login" class="btn btn--full">
 			{{ Form::close() }}
 			<div><p>Help: <a href="{{ action('RemindersController@getRemind') }}">I can't login or I forget my password.</a></p></div>
@@ -39,19 +38,14 @@ Come on in -
 	><div class="layout__item  lap-and-up-one-half  desk-three-fifths" data-ui-component="Sub content">
 		<h3>Sign up</h3>
 		{{ Form::open(['route' => 'signup']) }}
-			<!-- <div class="form-item">
-			<label for="email">Email</label>
-			<input type="email" name="email" placeholder="john_doe@example.com" value="{{{ Input::old('email') }}}" />
-			</div> -->
+
 			{{ Form::emailField('email', null, ['placeholder' => 'john_doe@example.com']) }}
 
 			{{ Form::passwordField('password', ['id' => 'toggle-password-signup', 'placeholder' => 'Set your password'], 'Password') }}
 
-			<!-- <div class="form-item">
-			<label for="password">Password</label>
-			<input type="password" id="toggle-password-signup" name="password" placeholder="Set your password" />
-			<small>At least 6 characters</small>
-			</div> -->
+			{{ Form::textField('first_name', null, ['placeholder' => 'John']) }}
+
+			{{ Form::textField('last_name', null, ['placeholder' => 'Doe']) }}
 
 			<input type="submit" value="Sign up" class="btn btn--full">
 			{{ Form::close() }}
