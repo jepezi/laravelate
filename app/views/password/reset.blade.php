@@ -31,11 +31,6 @@ Reset Password -
 			<input type="submit" value="Reset Password" class="btn btn--full">
 		{{ Form::close() }}
 
-		<h5>A note about spam filters</h5>
-		<p>If you don't get an email from us within a few minutes please be sure to check your spam filter. The email will be coming from do-not-reply@basecamp.com.</p>
-		
-		<div><p>I think I remember it. <a href="{{ route('comeonin') }}">I will try logging in again.</a></p></div>
-
 		</div>
 	</div>
 @stop
