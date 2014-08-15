@@ -12,7 +12,9 @@ class UserCreateValidator extends LaravelValidator implements Validable {
    */
   protected $rules = [
     'email' => 'required|email|unique:users',
-    'password' => 'required|min:6'
+    'password' => 'required|min:6',
+    'first_name' => 'required',
+    'last_name' => 'required'
   ];
 
   protected $messages = [
