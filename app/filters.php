@@ -63,6 +63,35 @@ Route::filter('auth.basic', function()
 
 /*
 |--------------------------------------------------------------------------
+| Not Activated
+|--------------------------------------------------------------------------
+| 
+| 'notActivated' filter protected the activated member to see 're-activate' page
+| It's used for unactivated member to 're-activate' again by resending the code.
+| 
+*/
+Route::filter('notActivated', function()
+{
+	$user = Auth::user();
+	if ($user->activated) return Redirect::intended('/')->with('success', Lang::get('activation.activated'));
+});
+
+/*
+|--------------------------------------------------------------------------
+| Native User
+|--------------------------------------------------------------------------
+| 
+| Protect OAuth-connected user to change password
+| 
+*/
+Route::filter('nativeuser', function()
+{
+	$user = Auth::user();
+	if (! empty($user->uid)) return Redirect::to('/')->with('info', Lang::get('auth.nativeuser'));
+});
+
+/*
+|--------------------------------------------------------------------------
 | Guest Filter
 |--------------------------------------------------------------------------
 |
@@ -74,7 +103,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/')->with('success', 'You are already logged in!');
+	if (Auth::check()) return Redirect::intended('/')->with('success', 'You are already logged in!');
 });
 
 // ajax filter
