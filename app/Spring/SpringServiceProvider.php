@@ -8,11 +8,50 @@ class SpringServiceProvider extends ServiceProvider
   public function boot()
   {
     require __DIR__ . '/form_macros.php';
+
+    \Event::listen('auth.login', function($user) {
+        $user->last_login = new \DateTime;
+
+        $user->save();
+    });
   }
 
   public function register()
   {
-    $this->registerSpring();
+    $this->registerErrorsHandlers();
+    $this->registerSpringApp();
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Error Handlers
+  |--------------------------------------------------------------------------
+  | 
+  | 
+  | 
+  */
+  public function registerErrorsHandlers()
+  {
+    $this->app->error(function($exception, $code)
+    {
+        switch ($code)
+        {
+            case 401:
+                return \Response::view('errors.401', array(), 401);
+
+            case 403:
+                return \Response::view('errors.403', array(), 403);
+
+            case 404:
+                return \Response::view('errors.404', array(), 404);
+
+            case 500:
+                return \Response::view('errors.500', array(), 500);
+
+            default:
+                return \Response::view('errors.default', array(), $code);
+        }
+    });
   }
 
   /*
@@ -23,7 +62,7 @@ class SpringServiceProvider extends ServiceProvider
   | 
   | 
   */
-  public function registerSpring()
+  public function registerSpringApp()
   {
 
     $app = $this->app;
