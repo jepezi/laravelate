@@ -26,6 +26,10 @@ class CreateUsersTable extends Migration {
 			$table->string('remember_token')->nullable();
 			$table->boolean('isAdmin')->default(false);
 			$table->string('avatar')->nullable();
+			// activation
+			$table->boolean('activated')->default(0);
+			$table->string('activation_code')->nullable();
+			$table->timestamp('activated_at')->nullable();
 			// contact
 			$table->string('website')->nullable();
             $table->string('twitter')->nullable();
@@ -38,7 +42,7 @@ class CreateUsersTable extends Migration {
 			$table->string('location')->nullable();
 			$table->string('gender')->nullable();
 			$table->timestamps();
-			$table->timestamp('lastloggin_at');
+			$table->timestamp('last_login');
 		});
 	}
 
