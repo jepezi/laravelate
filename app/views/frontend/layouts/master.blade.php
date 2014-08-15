@@ -25,6 +25,7 @@
   <body>
   @include ('frontend.includes.nav')
   <div class="wrapper">
+    @include ('frontend.includes.activate')
     <!-- Content  -->
     @yield('content')
     
