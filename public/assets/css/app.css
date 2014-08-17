@@ -487,6 +487,21 @@ h6, .zeta {
   font-size: 0.875rem;
   line-height: 1.71429; }
 
+a {
+  text-decoration: none;
+  color: #f43059;
+  -webkit-transition: all 200ms ease;
+          transition: all 200ms ease; }
+  a:hover, a:active, a:focus {
+    text-decoration: underline;
+    color: #e50c3b; }
+
+.link-secret {
+  color: inherit; }
+  .link-secret:hover, .link-secret:active, .link-secret:focus {
+    color: #f43059;
+    text-decoration: none; }
+
 /*------------------------------------*\
     #LISTS
 \*------------------------------------*/
@@ -800,6 +815,26 @@ img {
       padding-left: 0;
       margin-bottom: 24px; } }
 
+/*------------------------------------*\
+    #LIST-UI
+\*------------------------------------*/
+/**
+ * The UI list object creates blocky list items with a keyline separator out of
+ * a `ul` or `ol`.
+ */
+.navoverlay-body ul, .list-ui > li, .navoverlay-body %list-ui > ul {
+  border: 0 solid #ccc; }
+
+.navoverlay-body ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top-width: 1px; }
+
+.list-ui > li, .navoverlay-body %list-ui > ul {
+  padding: 24px;
+  border-bottom-width: 1px; }
+
 /**
  * #TRUMPS
  */
@@ -811,7 +846,7 @@ img {
  * Extend the clearfix class with Sass to avoid the `.clearfix` class appearing
  * over and over in your markup.
  */
-.box:after, .media:after, #nav ul:after {
+.box:after, .media:after {
   content: "";
   display: table;
   clear: both; }
@@ -1291,12 +1326,6 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
   min-height: 600px;
   height: 100%; }
 
-.block {
-  position: relative;
-  margin: 0 auto;
-  padding: 24px 20px;
-  max-width: 960px; }
-
 .close-btn {
   display: block;
   width: 42px;
@@ -1304,7 +1333,7 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
   padding: 0;
   border: 0;
   outline: none;
-  background: #efefef url("../images/close-btn-dark.svg") left center no-repeat;
+  background: white url("../images/close-btn-dark.svg") left center no-repeat;
   background-size: 30px 30px;
   overflow: hidden;
   white-space: nowrap;
@@ -1339,155 +1368,108 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
     opacity: 1;
     zoom: 1; }
 
-.svg-btn-close {
-  fill: #f43059; }
-
-#nav {
-  z-index: 200;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  color: #000;
-  background: white; }
-  #nav .close-btn {
-    display: none; }
-  #nav .block-title {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px; }
-  #nav .block {
-    z-index: 2;
-    position: relative;
-    padding: 12px 20px; }
-  #nav ul {
-    display: block; }
-  #nav li {
-    display: block; }
-    #nav li a {
-      display: block;
-      color: #000;
-      font-size: 16px;
-      font-size: 1rem;
-      line-height: 1.5;
-      font-weight: bold;
-      outline: none; }
-      #nav li a:focus, #nav li a:hover {
-        color: #f43059;
-        background: rgba(255, 255, 255, 0.1); }
-    #nav li.is-active a {
-      color: #f43059; }
-
 #top {
   z-index: 100;
   position: relative;
   color: #000;
   background: white; }
+  #top .block {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px 12px;
+    max-width: 1100px; }
+    @media screen and (min-width: 720px) {
+      #top .block {
+        padding: 20px 24px; } }
+  #top .navmain {
+    display: none; }
+    @media screen and (min-width: 720px) {
+      #top .navmain {
+        margin: 0;
+        padding: 0 0 0 12px;
+        display: inline-block; }
+        #top .navmain li {
+          display: inline-block;
+          padding: 0 10px; }
+          #top .navmain li a {
+            display: block;
+            font-size: 24px; } }
+  #top .navsecondary {
+    display: none; }
+    @media screen and (min-width: 720px) {
+      #top .navsecondary {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        position: absolute;
+        top: 20px;
+        right: 24px; }
+        #top .navsecondary li {
+          display: inline-block;
+          padding: 0 10px; }
+          #top .navsecondary li a {
+            display: block;
+            font-size: 18px; } }
   #top .block-title {
     margin: 0;
+    display: inline-block;
     font-size: 30px;
     line-height: 36px;
-    text-align: center;
     white-space: nowrap; }
   #top .nav-btn {
     position: absolute;
-    top: 24px;
-    left: 30px; }
+    top: 20px;
+    right: 20px; }
 
 @media screen and (max-width: 719px) {
-  #nav {
-    position: absolute;
-    top: 0;
-    padding-top: 84px; }
-    #nav:not(:target) {
-      z-index: 1;
-      height: 0; }
-    #nav:target .close-btn {
-      display: block; }
-    #nav .close-btn {
-      position: absolute;
-      top: -60px;
-      left: 30px; }
-    #nav .block {
-      position: relative;
-      padding: 0; }
-    #nav ul {
-      margin-left: 0; }
-    #nav li {
-      position: relative;
-      border-top: 1px solid rgba(50, 50, 50, 0.1); }
-      #nav li:last-child {
-        border-bottom: 1px solid rgba(50, 50, 50, 0.1); }
-      #nav li.is-active:after {
-        z-index: 50;
-        display: block;
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: -0.5px;
-        margin-top: -10px;
-        border-top: 10px transparent solid;
-        border-bottom: 10px transparent solid;
-        border-right: 10px #fff solid; }
-      #nav li a {
-        padding: 12px 30px; }
-  .js-ready #nav {
+  /*
+    |--------------------------------------------------------------------------
+    | navoverlay Custom Style
+    |--------------------------------------------------------------------------
+    | 
+    | 
+    | 
+    */
+  #navoverlay {
+    padding: 0 0;
+    background-color: white;
     height: 100%;
-    width: 70%;
-    background: #efefef;
-    -webkit-box-shadow: inset -24px 0 24px -12px rgba(0, 0, 0, 0.25);
-            box-shadow: inset -24px 0 24px -12px rgba(0, 0, 0, 0.25); }
-    .js-ready #nav .block {
-      background: transparent; }
-    .js-ready #nav .close-btn {
+    text-indent: 12px; }
+  .navoverlay-top-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .navoverlay-top-links ul li a {
       display: block;
-      opacity: 0.7;
-      zoom: 1; }
-      .js-ready #nav .close-btn:focus, .js-ready #nav .close-btn:hover {
-        opacity: 1;
-        zoom: 1; }
-  .js-ready #nav {
-    left: -70%; }
-  .js-ready #inner-wrap {
-    left: 0; }
-  .js-nav #inner-wrap {
-    left: 70%; }
-  .csstransforms3d.csstransitions.js-ready #nav {
+      line-height: 76px;
+      font-size: 24px; }
+  .navoverlay-body ul li a {
+    display: block;
+    font-size: 24px;
+    line-height: 2.4;
+    border-top: 1px solid #ddd; }
+  .navoverlay-body ul li:last-child a {
+    border-bottom: 1px solid #ddd; }
+  #navoverlay footer {
+    background-color: #f9f9f9;
+    padding-top: 20px;
+    font-size: 0.9em; }
+  #nav .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px; }
+  .js-ready #navoverlay {
+    position: absolute;
     left: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-            transform: translate3d(-100%, 0, 0);
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden; }
-  .csstransforms3d.csstransitions.js-ready #inner-wrap {
-    left: 0 !important;
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 500ms ease;
-            transition: transform 500ms ease;
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden; }
-  .csstransforms3d.csstransitions.js-nav #inner-wrap {
-    -webkit-transform: translate3d(70%, 0, 0) scale3d(1, 1, 1);
-            transform: translate3d(70%, 0, 0) scale3d(1, 1, 1); }
-  .csstransforms3d.csstransitions.js-ready #nav .block {
-    opacity: 0.7;
-    zoom: 1;
-    -webkit-transition: opacity 300ms 100ms ease, -webkit-transform 500ms ease;
-            transition: opacity 300ms 100ms ease, transform 500ms ease;
-    -webkit-transform: translate3d(70%, 0, 0) scale3d(0.9, 0.9, 0.9);
-            transform: translate3d(70%, 0, 0) scale3d(0.9, 0.9, 0.9);
-    -webkit-transform-origin: 50% 0%;
-        -ms-transform-origin: 50% 0%;
-            transform-origin: 50% 0%; }
-  .csstransforms3d.csstransitions.js-nav #nav .block {
-    opacity: 1;
-    zoom: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0); } }
+    width: 100%; }
+  .js-ready #top, .js-ready .wrapper {
+    display: block; }
+  .js-ready #navoverlay {
+    display: none; }
+  .js-nav #top, .js-nav .wrapper {
+    display: none; }
+  .js-nav #navoverlay {
+    display: block; } }
 
 @media screen and (min-width: 720px) {
   #top .nav-btn {
@@ -1499,52 +1481,29 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
     padding: 0;
     position: absolute;
     width: 1px; }
-  #nav .close-btn {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px; }
-  #nav .block-title {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px; }
-  #nav ul {
-    text-align: center;
-    white-space: nowrap; }
-  #nav li {
-    display: inline-block;
-    border-right: 1px solid rgba(255, 255, 255, 0.1); }
-    #nav li:last-child {
-      border-right: none; }
-    #nav li a {
-      padding: 6px 12px; } }
+  #navoverlay {
+    display: none; } }
 
-.svg-close-path {
-  fill: #f43059; }
-
-.svg-close-line {
-  stroke: #f43059; }
-
-.svg-nav-circle {
-  fill: #f43059; }
-
-.svg-nav-rect {
-  fill: #f43059; }
-
+/*
+  In master.blade.php
+  - include 1 place
+  @include ('frontend.includes.navoffcanvas')
+  - link js
+    <script src="{{ asset('assets/js/nav-offcanvas.js') }}"></script>
+*/
+/*
+  In master.blade.php
+  - include 2 places
+    @include ('frontend.includes.navoverlay-head')
+    @include ('frontend.includes.navoverlay-overlay')
+  - link js
+    <script src="{{ asset('assets/js/nav-overlay.js') }}"></script>
+*/
 html, body {
   height: 100%; }
 
 body {
-  font-family: 'Noto Sans', sans-serif; }
+  font-family: sans-serif; }
 
 /* ---------------- list dl ---------------- */
 dl.table-display {

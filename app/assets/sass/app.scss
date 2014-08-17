@@ -38,6 +38,7 @@
  */
 @import "../vendor/inuit-page/base.page";
 @import "../vendor/inuit-headings/base.headings";
+@import "base.links";
 @import "../vendor/inuit-lists/base.lists";
 @import "../vendor/inuit-images/base.images";
 
@@ -65,6 +66,7 @@ $inuit-enable-flag--rev:        	true;
 $inuit-enable-flag--responsive: 	true;
 $inuit-flag-collapse-at:        	479px !default;
 @import "../vendor/inuit-flag/objects.flag";
+@import "../vendor/inuit-list-ui/objects.list-ui";
 
 
 /**
@@ -81,8 +83,30 @@ $inuit-use-fractions:   			false;
 */
 @import "components.form";
 @import "components.progressbar";
-@import "components.nav-offcanvas";
+@import "components.nav-overlay";
+
+// ------------ Nav OFFCANVAS -----------
+// @import "components.nav-offcanvas";
+/*
+  In master.blade.php
+  - include 1 place
+  @include ('frontend.includes.navoffcanvas')
+  - link js
+    <script src="{{ asset('assets/js/nav-offcanvas.js') }}"></script>
+*/
+
+
+// ------------ Nav OVERLAY -------------
 // @import "components.nav-overlay";
+/*
+  In master.blade.php
+  - include 2 places
+    @include ('frontend.includes.navoverlay-head')
+    @include ('frontend.includes.navoverlay-overlay')
+  - link js
+    <script src="{{ asset('assets/js/nav-overlay.js') }}"></script>
+*/
+
 
 
 // Bootstrap custom
@@ -100,9 +124,9 @@ body {
 
   // font-family: 'Roboto', sans-serif;
   // font-family: 'PT Sans', sans-serif;
-  font-family: 'Noto Sans', sans-serif;
+  // font-family: 'Noto Sans', sans-serif;
   // font-family: 'Lato', sans-serif;
-	// font-family: sans-serif;
+	font-family: sans-serif;
 }
 
 /* ---------------- list dl ---------------- */

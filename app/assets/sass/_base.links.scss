@@ -1,0 +1,21 @@
+a {
+    text-decoration: none;
+    color: $color-links;
+    transition: all 200ms ease;
+
+    @include attention() {
+        text-decoration: underline;
+        color: darken($color-links, 10%);
+    }
+
+}
+
+.link-secret {
+    color: inherit;
+
+    @include attention() {
+        color: $color-links;
+        text-decoration: none;
+    }
+
+}

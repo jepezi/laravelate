@@ -1,7 +1,48 @@
-$step: 4;
-$background-color: white;
+// 2 - disable transition
+// 4 - enable
+$step: 2;
+
+// color
+//-- font
 $font-color: $inuit-base-text-color;
 $link-color: $brand-color;
+
+//-- others
+$background-color: white;
+$background-overlay: white;
+
+$overlay-link-border-color: #ddd;
+
+// space
+// $pad-side: 20px;
+$pad-side-small: $spacing-unit--small;
+$pad-side: $spacing-unit;
+
+// ---------------------------
+// Default topbar tall -------
+// ---------------------------
+$pad-tall: 20px;
+// ---------------------------
+// ---------------------------
+
+$overlay-pad-side: 0;
+$overlay-pad-tall: 0;
+
+// share spacing value for both icons
+$nav-btn-top: $pad-tall;
+$nav-btn-side: 20px;
+$nav-btn-width: 42px;
+$nav-btn-height: 36px;
+
+// font size
+$font-size-link-overlay-1: 24px;
+$font-size-link-overlay-2: 24px;
+$font-size-link-navmain: 24px;
+$font-size-link-navsecondary: 18px;
+
+
+// time
+$howfast: 350ms;
 
 #outer-wrap {
     position: relative;
@@ -19,21 +60,16 @@ $link-color: $brand-color;
 
 // --------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------
-.block {
-    position: relative;
-    margin: 0 auto;
-    padding: 24px 20px;
-    max-width: 960px;
-}
+
 
 .close-btn {
     display: block;
-    width: 42px;
-    height: 36px;
+    width: $nav-btn-width;
+    height: $nav-btn-height;
     padding: 0;
     border: 0;
     outline: none;
-    background: darken($background-color, 10%) url("../images/close-btn.svg") left center no-repeat;
+    background: $background-color url("../images/close-btn-dark.svg") left center no-repeat;
     background-size: 30px 30px;
     overflow: hidden;
     white-space: nowrap;
@@ -53,12 +89,12 @@ $link-color: $brand-color;
 
 .nav-btn {
     display: block;
-    width: 42px;
-    height: 36px;
+    width: $nav-btn-width;
+    height: $nav-btn-height;
     padding: 0;
     border: 0;
     outline: none;
-    background: darken($background-color, 10%) url("../images/nav-icon.svg") left center no-repeat;
+    background: $background-color url("../images/nav-icon-dark.svg") left center no-repeat;
     background-size: 30px 24px;
     overflow: hidden;
     white-space: nowrap;
@@ -75,12 +111,10 @@ $link-color: $brand-color;
         @include opacity(1);
     }
 }
-.svg-btn-close {
-	fill: $link-color;
-}
-// --------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------
 
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// TOP
 // --------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------
 #top {
@@ -89,8 +123,54 @@ $link-color: $brand-color;
     color: $font-color;
     background: $background-color;
 
+    .block {
+        position: relative;
+        margin: 0 auto;
+        padding: $pad-tall $pad-side-small;
+        max-width: 1100px;
+        @include media-query(lap-and-up) {
+            padding: $pad-tall $pad-side;
+        }
+    }
+
+    .navmain {
+        display: none;
+        @include media-query(lap-and-up) {
+            margin: 0; padding: 0 0 0 12px;
+            display: inline-block;
+
+            li {
+                display: inline-block;
+                padding: 0 10px;
+                a {
+                    display: block;
+                    font-size: $font-size-link-navmain;
+                }
+            }
+        }
+    }
+    .navsecondary {
+        display: none;
+        @include media-query(lap-and-up) {
+            margin: 0; padding: 0;
+            display: inline-block;
+            position: absolute;
+            top: $pad-tall;
+            right: $pad-side;
+            li {
+                display: inline-block;
+                padding: 0 10px;
+                a {
+                    display: block;
+                    font-size: $font-size-link-navsecondary;
+                }
+            }
+        }
+    }
+
     .block-title {
         margin: 0;
+        display: inline-block;
         font-size: 30px;
         line-height: 36px;
         // text-align: center;
@@ -99,19 +179,79 @@ $link-color: $brand-color;
 
     .nav-btn {
         position: absolute;
-        top: 24px;
-        right: 30px;
+        top: $nav-btn-top;
+        right: $nav-btn-side;
     }
 }
 // --------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------
 
 
-
-
 // media query
 @include media-query(palm) {
 	$nav-off-canvas-width: 70%;
+
+    /*
+    |--------------------------------------------------------------------------
+    | navoverlay Custom Style
+    |--------------------------------------------------------------------------
+    | 
+    | 
+    | 
+    */
+    #navoverlay {
+        padding: $overlay-pad-tall $overlay-pad-side;
+        background-color: $background-overlay;
+        height: 100%;
+        text-indent: $inuit-base-spacing-unit--small;
+    }
+    .navoverlay-top {
+        
+    }
+    .navoverlay-top-links {
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+                a {
+                    display: block;
+                    line-height: $nav-btn-top + $nav-btn-top + $nav-btn-height;
+                    font-size: $font-size-link-overlay-1;
+                }
+            }
+        }
+    }
+    .navoverlay-body {
+        ul {
+            @extend %list-ui;
+            li {
+                a {
+                    display: block;
+                    font-size: $font-size-link-overlay-2;
+                    line-height: 2.4;
+                    border-top: 1px solid $overlay-link-border-color;
+                }
+                &:last-child a {
+                    border-bottom: 1px solid $overlay-link-border-color;
+                }
+            }
+        }
+    }
+    #navoverlay footer {
+        background-color: $inuit-base-background-color;
+        padding-top: 20px;
+        font-size: .9em;
+    }
+    // end navoverlay custom style
+    
+    #nav {
+        .close-btn {
+            position: absolute;
+            top: $nav-btn-top;
+            right: $nav-btn-side;
+        }
+    }
 
 	@if ($step > 1) {
 
@@ -119,7 +259,6 @@ $link-color: $brand-color;
 			
 			#navoverlay {
 				position: absolute;
-				top: -100;
 				left: 0;
 				width: 100%;
 			}
@@ -149,7 +288,6 @@ $link-color: $brand-color;
 
 	        #navoverlay {
 	        	display: block;
-	        	top: 0;
 	        }
 	    }
 
@@ -160,12 +298,21 @@ $link-color: $brand-color;
 	    .csstransforms3d.csstransitions.js-ready {
 
 	        #navoverlay {
-	            top: 0 !important;
-	            transform: translate3d(0,0,0) scale3d(1,1,1);
-	            transition: transform 500ms ease;
+                display: block !important;
+                transform: scale3d(0.9,0.9,0.9);
+                // transform: translate3d(0,0,0) scale3d(0.9,0.9,0.9);
+	            // transform: translate3d(0,0,0);
+	            transition: all $howfast ease;
 	            backface-visibility: hidden;
 	        }
 	    }
+
+        .csstransforms3d.csstransitions.js-nav {
+            #navoverlay {
+                transform: scale3d(1,1,1);
+                // transform: translate3d(-10%,0,0);
+            }
+        }
 
 	} // end @if ($step > 2)
 
@@ -187,15 +334,4 @@ $link-color: $brand-color;
 
 }
 
-.svg-close-path {
-	fill: $link-color;
-}
-.svg-close-line {
-	stroke: $link-color;
-}
-.svg-nav-circle {
-	fill: $link-color;
-}
-.svg-nav-rect {
-	fill: $link-color;
-}
+

@@ -91,9 +91,7 @@ $pad-top-offcanvas-menu: 84px;
         @include opacity(1);
     }
 }
-.svg-btn-close {
-	fill: $link-color;
-}
+
 // --------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------
 #nav {
@@ -388,15 +386,3 @@ $pad-top-offcanvas-menu: 84px;
 
 }
 
-.svg-close-path {
-	fill: $link-color;
-}
-.svg-close-line {
-	stroke: $link-color;
-}
-.svg-nav-circle {
-	fill: $link-color;
-}
-.svg-nav-rect {
-	fill: $link-color;
-}
