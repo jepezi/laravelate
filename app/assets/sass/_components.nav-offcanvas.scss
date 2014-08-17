@@ -1,7 +1,23 @@
 $step: 4;
-$background-color: white;
+
+// color
+//-- font
 $font-color: $inuit-base-text-color;
 $link-color: $brand-color;
+
+//-- others
+$background-color: white;
+$background-offcanvas-color: #efefef;
+$border-offcanvas-color: rgba(50,50,50, 0.1);
+
+
+// margin left of ul menu (for full border)
+$margin-left-offcanvas-ul: 0;
+// padding left (and right) offcanvas - like indent
+$pad-offcanvas-menu: 30px;
+// vertical space
+$pad-top-offcanvas-menu: 84px;
+
 
 #outer-wrap {
     position: relative;
@@ -33,7 +49,7 @@ $link-color: $brand-color;
     padding: 0;
     border: 0;
     outline: none;
-    background: darken($background-color, 10%) url("../images/close-btn.svg") left center no-repeat;
+    background: $background-offcanvas-color url("../images/close-btn-dark.svg") left center no-repeat;
     background-size: 30px 30px;
     overflow: hidden;
     white-space: nowrap;
@@ -58,7 +74,7 @@ $link-color: $brand-color;
     padding: 0;
     border: 0;
     outline: none;
-    background: darken($background-color, 10%) url("../images/nav-icon.svg") left center no-repeat;
+    background: $background-color url("../images/nav-icon-dark.svg") left center no-repeat;
     background-size: 30px 24px;
     overflow: hidden;
     white-space: nowrap;
@@ -167,7 +183,7 @@ $link-color: $brand-color;
 	#nav {
 	    position: absolute;
 	    top: 0;
-	    padding-top: 84px;
+	    padding-top: $pad-top-offcanvas-menu;
 
 	    // .no-js on step 2?
 
@@ -185,7 +201,7 @@ $link-color: $brand-color;
 	    .close-btn {
 	        position: absolute;
 	        top: -60px;
-	        left: 30px;
+	        left: $pad-offcanvas-menu;
 	    }
 
 	    .block {
@@ -193,12 +209,16 @@ $link-color: $brand-color;
 	        padding: 0;
 	    }
 
+	    ul {
+	    	margin-left: $margin-left-offcanvas-ul;
+	    }
+
 	    li {
 	        position: relative;
-	        border-top: 1px solid rgba(255,255,255, 0.1);
+	        border-top: 1px solid $border-offcanvas-color;
 
 	        &:last-child {
-	            border-bottom: 1px solid rgba(255,255,255, 0.1);
+	            border-bottom: 1px solid $border-offcanvas-color;
 	        }
 
 	        &.is-active:after {
@@ -215,7 +235,7 @@ $link-color: $brand-color;
 	        }
 
 	        a {
-	            padding: 12px 30px;
+	            padding: 12px $pad-offcanvas-menu;
 	        }
 	    }
 	}
@@ -227,7 +247,7 @@ $link-color: $brand-color;
 	        #nav {
 	            height: 100%;
 	            width: $nav-off-canvas-width;
-	            background: $background-color;
+	            background: $background-offcanvas-color;
 	            box-shadow: inset -24px 0 24px -12px rgba(0,0,0, 0.25);
 
 	            .block {

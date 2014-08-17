@@ -1304,7 +1304,7 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
   padding: 0;
   border: 0;
   outline: none;
-  background: #e6e6e6 url("../images/close-btn.svg") left center no-repeat;
+  background: #efefef url("../images/close-btn-dark.svg") left center no-repeat;
   background-size: 30px 30px;
   overflow: hidden;
   white-space: nowrap;
@@ -1325,7 +1325,7 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
   padding: 0;
   border: 0;
   outline: none;
-  background: #e6e6e6 url("../images/nav-icon.svg") left center no-repeat;
+  background: white url("../images/nav-icon-dark.svg") left center no-repeat;
   background-size: 30px 24px;
   overflow: hidden;
   white-space: nowrap;
@@ -1415,11 +1415,13 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
     #nav .block {
       position: relative;
       padding: 0; }
+    #nav ul {
+      margin-left: 0; }
     #nav li {
       position: relative;
-      border-top: 1px solid rgba(255, 255, 255, 0.1); }
+      border-top: 1px solid rgba(50, 50, 50, 0.1); }
       #nav li:last-child {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        border-bottom: 1px solid rgba(50, 50, 50, 0.1); }
       #nav li.is-active:after {
         z-index: 50;
         display: block;
@@ -1436,7 +1438,7 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
   .js-ready #nav {
     height: 100%;
     width: 70%;
-    background: white;
+    background: #efefef;
     -webkit-box-shadow: inset -24px 0 24px -12px rgba(0, 0, 0, 0.25);
             box-shadow: inset -24px 0 24px -12px rgba(0, 0, 0, 0.25); }
     .js-ready #nav .block {
