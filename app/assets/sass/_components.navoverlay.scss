@@ -1,0 +1,201 @@
+$step: 4;
+$background-color: white;
+$font-color: $inuit-base-text-color;
+$link-color: $brand-color;
+
+#outer-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 100%;
+}
+
+#inner-wrap {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    height: 100%;
+}
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+.block {
+    position: relative;
+    margin: 0 auto;
+    padding: 24px 20px;
+    max-width: 960px;
+}
+
+.close-btn {
+    display: block;
+    width: 42px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: darken($background-color, 10%) url("../images/close-btn.svg") left center no-repeat;
+    background-size: 30px 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-indent: 100%;
+    @include opacity(1);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    .no-svg & {
+        background-image: url("../images/close-btn.png");
+    }
+
+    &:focus,
+    &:hover {
+        @include opacity(1);
+    }
+}
+
+.nav-btn {
+    display: block;
+    width: 42px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: darken($background-color, 10%) url("../images/nav-icon.svg") left center no-repeat;
+    background-size: 30px 24px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-indent: 100%;
+    @include opacity(0.7);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    .no-svg & {
+        background-image: url("../images/nav-icon.png");
+    }
+
+    &:hover,
+    &:focus {
+        @include opacity(1);
+    }
+}
+.svg-btn-close {
+	fill: $link-color;
+}
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+#top {
+    z-index: 100;
+    position: relative;
+    color: $font-color;
+    background: $background-color;
+
+    .block-title {
+        margin: 0;
+        font-size: 30px;
+        line-height: 36px;
+        // text-align: center;
+        white-space: nowrap;
+    }
+
+    .nav-btn {
+        position: absolute;
+        top: 24px;
+        right: 30px;
+    }
+}
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+
+
+
+
+// media query
+@include media-query(palm) {
+	$nav-off-canvas-width: 70%;
+
+	@if ($step > 1) {
+
+	    .js-ready {
+			
+			#navoverlay {
+				position: absolute;
+				top: -100;
+				left: 0;
+				width: 100%;
+			}
+	        
+	    }
+
+	} // end @if ($step > 1) 
+
+	@if ($step > 1) {
+
+	    .js-ready {
+
+	    	#top, .wrapper {
+	    		display: block;
+	    	}
+
+	        #navoverlay {
+	        	display: none;
+	        }
+	    }
+
+	    .js-nav {
+
+	    	#top, .wrapper {
+	    		display: none;
+	    	}
+
+	        #navoverlay {
+	        	display: block;
+	        	top: 0;
+	        }
+	    }
+
+	} // end @if ($step > 1)
+
+	@if ($step > 2) {
+
+	    .csstransforms3d.csstransitions.js-ready {
+
+	        #navoverlay {
+	            top: 0 !important;
+	            transform: translate3d(0,0,0) scale3d(1,1,1);
+	            transition: transform 500ms ease;
+	            backface-visibility: hidden;
+	        }
+	    }
+
+	} // end @if ($step > 2)
+
+    
+
+}
+
+@include media-query(lap-and-up) {
+    #top {
+
+	    .nav-btn {
+	        @include visuallyhidden;
+	    }
+	}
+
+	#navoverlay {
+		display: none;
+	}
+
+}
+
+.svg-close-path {
+	fill: $link-color;
+}
+.svg-close-line {
+	stroke: $link-color;
+}
+.svg-nav-circle {
+	fill: $link-color;
+}
+.svg-nav-rect {
+	fill: $link-color;
+}

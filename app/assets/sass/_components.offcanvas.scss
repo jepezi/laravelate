@@ -1,0 +1,382 @@
+$step: 4;
+$background-color: white;
+$font-color: $inuit-base-text-color;
+$link-color: $brand-color;
+
+#outer-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 100%;
+}
+
+#inner-wrap {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    height: 100%;
+}
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+.block {
+    position: relative;
+    margin: 0 auto;
+    padding: 24px 20px;
+    max-width: 960px;
+}
+
+.close-btn {
+    display: block;
+    width: 42px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: darken($background-color, 10%) url("../images/close-btn.svg") left center no-repeat;
+    background-size: 30px 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-indent: 100%;
+    @include opacity(1);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    .no-svg & {
+        background-image: url("../images/close-btn.png");
+    }
+
+    &:focus,
+    &:hover {
+        @include opacity(1);
+    }
+}
+
+.nav-btn {
+    display: block;
+    width: 42px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: darken($background-color, 10%) url("../images/nav-icon.svg") left center no-repeat;
+    background-size: 30px 24px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-indent: 100%;
+    @include opacity(0.7);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    .no-svg & {
+        background-image: url("../images/nav-icon.png");
+    }
+
+    &:hover,
+    &:focus {
+        @include opacity(1);
+    }
+}
+.svg-btn-close {
+	fill: $link-color;
+}
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+#nav {
+    z-index: 200;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    color: $font-color;
+    background: $background-color;
+
+    .close-btn {
+        display: none;
+    }
+
+    .block-title {
+        @include visuallyhidden;
+    }
+
+    .block {
+        z-index: 2;
+        position: relative;
+        padding: 12px 20px;
+        
+    }
+
+    ul {
+        @extend %clearfix;
+        display: block;
+    }
+
+    li {
+        display: block;
+
+        a {
+            display: block;
+            color: $font-color;
+            @include font-size(16px);
+            font-weight: bold;
+            outline: none;
+
+            &:focus,
+            &:hover {
+                color: $link-color;
+                background: rgba(255,255,255, 0.1);
+            }
+        }
+
+        &.is-active {
+            a {
+                color: $link-color;
+            }
+        }
+    }
+}
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+#top {
+    z-index: 100;
+    position: relative;
+    color: $font-color;
+    background: $background-color;
+
+    .block-title {
+        margin: 0;
+        font-size: 30px;
+        line-height: 36px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .nav-btn {
+        position: absolute;
+        top: 24px;
+        left: 30px;
+    }
+}
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+
+
+
+
+// media query
+@include media-query(palm) {
+	$nav-off-canvas-width: 70%;
+
+	#nav {
+	    position: absolute;
+	    top: 0;
+	    padding-top: 84px;
+
+	    // .no-js on step 2?
+
+	    &:not(:target) {
+	        z-index: 1;
+	        height: 0;
+	    }
+
+	    &:target {
+	        .close-btn {
+	            display: block;
+	        }
+	    }
+
+	    .close-btn {
+	        position: absolute;
+	        top: -60px;
+	        left: 30px;
+	    }
+
+	    .block {
+	        position: relative;
+	        padding: 0;
+	    }
+
+	    li {
+	        position: relative;
+	        border-top: 1px solid rgba(255,255,255, 0.1);
+
+	        &:last-child {
+	            border-bottom: 1px solid rgba(255,255,255, 0.1);
+	        }
+
+	        &.is-active:after {
+	            z-index: 50;
+	            display: block;
+	            content: "";
+	            position: absolute;
+	            top: 50%;
+	            right: -0.5px;
+	            margin-top: -10px;
+	            border-top: 10px transparent solid;
+	            border-bottom: 10px transparent solid;
+	            border-right: 10px #fff solid;
+	        }
+
+	        a {
+	            padding: 12px 30px;
+	        }
+	    }
+	}
+
+	@if ($step > 1) {
+
+	    .js-ready {
+
+	        #nav {
+	            height: 100%;
+	            width: $nav-off-canvas-width;
+	            background: $background-color;
+	            box-shadow: inset -24px 0 24px -12px rgba(0,0,0, 0.25);
+
+	            .block {
+	                background: transparent;
+	            }
+
+	            .close-btn {
+	                display: block;
+	                @include opacity(0.7);
+
+	                &:focus,
+	                &:hover {
+	                    @include opacity(1);
+	                }
+	            }
+	        }
+	    }
+
+	} // end @if ($step > 1) 
+
+	@if ($step > 1) {
+
+	    .js-ready {
+
+	        #nav {
+	            left: (0 - $nav-off-canvas-width);
+	        }
+
+	        #inner-wrap {
+	            left: 0;
+	        }
+	    }
+
+	    .js-nav {
+
+	        #inner-wrap {
+	            left: $nav-off-canvas-width;
+	        }
+	    }
+
+	} // end @if ($step > 1)
+
+	@if ($step > 2) {
+
+	    .csstransforms3d.csstransitions.js-ready {
+
+	        #nav {
+	            left: 0;
+	            transform: translate3d(-100%,0,0);
+	            backface-visibility: hidden;
+	        }
+
+	        #inner-wrap {
+	            left: 0 !important;
+	            transform: translate3d(0,0,0);
+	            transition: transform 500ms ease;
+	            backface-visibility: hidden;
+	        }
+	    }
+
+	    .csstransforms3d.csstransitions.js-nav {
+
+	        #inner-wrap {
+	            transform: translate3d($nav-off-canvas-width,0,0) scale3d(1,1,1);
+	        }
+	    }
+
+	} // end @if ($step > 2)
+
+
+	@if ($step > 3) {
+
+	    .csstransforms3d.csstransitions.js-ready {
+
+	        #nav {
+
+	            .block {
+	                @include opacity(0.7);
+	                transition: opacity 300ms 100ms ease, transform 500ms ease;
+	                transform: translate3d($nav-off-canvas-width,0,0) scale3d(0.9,0.9,0.9);
+	                transform-origin: 50% 0%;
+	            }
+	        }
+	    }
+
+	    .csstransforms3d.csstransitions.js-nav {
+
+	        #nav {
+
+	            .block {
+	                @include opacity(1);
+	                transform: translate3d(0,0,0);
+	            }
+	        }
+	    }
+
+	} // end @if ($step > 3)
+    
+
+}
+
+@include media-query(lap-and-up) {
+    #top {
+
+	    .nav-btn {
+	        @include visuallyhidden;
+	    }
+	}
+
+	#nav {
+
+	    .close-btn {
+	        @include visuallyhidden;
+	    }
+
+	    .block-title {
+	        @include visuallyhidden;
+	    }
+
+	    ul {
+	        text-align: center;
+	        white-space: nowrap;
+	    }
+
+	    li {
+	        display: inline-block;
+	        border-right: 1px solid rgba(255,255,255, 0.1);
+
+	        &:last-child {
+	            border-right: none;
+	        }
+
+	        a {
+	            padding: 6px 12px;
+	        }
+	    }
+	}
+
+}
+
+.svg-close-path {
+	fill: $link-color;
+}
+.svg-close-line {
+	stroke: $link-color;
+}
+.svg-nav-circle {
+	fill: $link-color;
+}
+.svg-nav-rect {
+	fill: $link-color;
+}

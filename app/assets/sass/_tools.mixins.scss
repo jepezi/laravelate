@@ -12,6 +12,31 @@
   #{$property}: $value;
 }
 
+@mixin opacity ( $value: 0.5 ) {
+  opacity: $value;
+  // -ms-filter: “progid:DXImageTransform.Microsoft.Alpha(Opacity=”+$value*100+“)”;
+  // filter: alpha(opacity=$value*100);
+  zoom: 1;
+}
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+@mixin hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+@mixin visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
 @mixin form-control-validation($text-color: #555, $border-color: #ccc, $background-color: #f5f5f5) {
   // Color the label and help text
   .help-block,

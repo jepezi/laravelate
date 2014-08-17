@@ -81,11 +81,16 @@ $inuit-use-fractions:   			false;
 */
 @import "components.form";
 @import "components.progressbar";
+@import "components.offcanvas";
+// @import "components.navoverlay";
 
 
 // Bootstrap custom
 // @import '../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap-custom';
 
+html, body {
+  height: 100%;
+}
 
 body {
 	// padding-top: 0;
@@ -93,7 +98,11 @@ body {
 
 	// font-family: $fontBrandRegular;
 
-	font-family: 'Lato', sans-serif;
+  // font-family: 'Roboto', sans-serif;
+  // font-family: 'PT Sans', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  // font-family: 'Lato', sans-serif;
+	// font-family: sans-serif;
 }
 
 /* ---------------- list dl ---------------- */
