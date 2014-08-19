@@ -815,26 +815,6 @@ img {
       padding-left: 0;
       margin-bottom: 24px; } }
 
-/*------------------------------------*\
-    #LIST-UI
-\*------------------------------------*/
-/**
- * The UI list object creates blocky list items with a keyline separator out of
- * a `ul` or `ol`.
- */
-.navoverlay-body ul, .list-ui > li, .navoverlay-body %list-ui > ul {
-  border: 0 solid #ccc; }
-
-.navoverlay-body ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top-width: 1px; }
-
-.list-ui > li, .navoverlay-body %list-ui > ul {
-  padding: 24px;
-  border-bottom-width: 1px; }
-
 /**
  * #TRUMPS
  */
@@ -1326,6 +1306,9 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
   min-height: 600px;
   height: 100%; }
 
+.wrapper {
+  margin-top: 104px; }
+
 .close-btn {
   display: block;
   width: 42px;
@@ -1370,17 +1353,19 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
 
 #top {
   z-index: 100;
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
   color: #000;
   background: white; }
   #top .block {
     position: relative;
     margin: 0 auto;
-    padding: 20px 12px;
+    padding: 24px 12px;
     max-width: 1100px; }
     @media screen and (min-width: 720px) {
       #top .block {
-        padding: 20px 24px; } }
+        padding: 24px 24px; } }
   #top .navmain {
     display: none; }
     @media screen and (min-width: 720px) {
@@ -1393,23 +1378,23 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
           padding: 0 10px; }
           #top .navmain li a {
             display: block;
-            font-size: 24px; } }
+            font-size: 16px; } }
   #top .navsecondary {
     display: none; }
     @media screen and (min-width: 720px) {
       #top .navsecondary {
+        display: block;
         margin: 0;
         padding: 0;
-        display: inline-block;
         position: absolute;
-        top: 20px;
+        top: 24px;
         right: 24px; }
         #top .navsecondary li {
           display: inline-block;
           padding: 0 10px; }
           #top .navsecondary li a {
             display: block;
-            font-size: 18px; } }
+            font-size: 13px; } }
   #top .block-title {
     margin: 0;
     display: inline-block;
@@ -1418,57 +1403,67 @@ form.border-radius input, form.border-radius select, form.border-radius textarea
     white-space: nowrap; }
   #top .nav-btn {
     position: absolute;
-    top: 20px;
+    top: 24px;
     right: 20px; }
 
 @media screen and (max-width: 719px) {
   /*
     |--------------------------------------------------------------------------
-    | navoverlay Custom Style
+    | Nav Overlay 
     |--------------------------------------------------------------------------
     | 
     | 
     | 
     */
+  #nav .close-btn {
+    position: absolute;
+    top: 24px;
+    right: 20px; }
   #navoverlay {
     padding: 0 0;
-    background-color: white;
+    background-color: #f9f9f9;
     height: 100%;
-    text-indent: 12px; }
+    text-indent: 12px;
+    padding-top: -24px;
+    display: none; }
+  .navoverlay-top {
+    background-color: white; }
   .navoverlay-top-links ul {
     margin: 0;
     padding: 0;
     list-style: none; }
     .navoverlay-top-links ul li a {
       display: block;
-      line-height: 76px;
+      line-height: 84px;
       font-size: 24px; }
-  .navoverlay-body ul li a {
-    display: block;
-    font-size: 24px;
-    line-height: 2.4;
-    border-top: 1px solid #ddd; }
-  .navoverlay-body ul li:last-child a {
-    border-bottom: 1px solid #ddd; }
+  .navoverlay-body {
+    background-color: white; }
+    .navoverlay-body ul {
+      margin: 0;
+      padding: 0;
+      list-style: none; }
+      .navoverlay-body ul li a {
+        display: block;
+        font-size: 24px;
+        line-height: 2.4;
+        border-top: 1px solid #ddd; }
+      .navoverlay-body ul li:last-child a {
+        border-bottom: 1px solid #ddd; }
   #navoverlay footer {
     background-color: #f9f9f9;
     padding-top: 20px;
     font-size: 0.9em; }
-  #nav .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px; }
-  .js-ready #navoverlay {
-    position: absolute;
-    left: 0;
-    width: 100%; }
-  .js-ready #top, .js-ready .wrapper {
+  .js-ready #top {
     display: block; }
   .js-ready #navoverlay {
-    display: none; }
-  .js-nav #top, .js-nav .wrapper {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: -9999px; }
+  .js-nav #top {
     display: none; }
   .js-nav #navoverlay {
+    left: 0;
     display: block; } }
 
 @media screen and (min-width: 720px) {
@@ -1503,7 +1498,7 @@ html, body {
   height: 100%; }
 
 body {
-  font-family: sans-serif; }
+  font-family: 'Noto Sans', sans-serif; }
 
 /* ---------------- list dl ---------------- */
 dl.table-display {

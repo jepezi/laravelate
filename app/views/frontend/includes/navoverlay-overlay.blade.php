@@ -1,4 +1,6 @@
 <div id="navoverlay">
+	<div class="navoverlay-wrap" id="navoverlay-wrap">
+
 	<div class="navoverlay-top">
 		<div class="navoverlay-top-links">
 			<ul>
@@ -23,4 +25,5 @@
 		<a href="#">Terms of Service</a> <a href="#">Privacy Policy</a>
 		<div>© 2014 Company. All rights reserved.</div>
 		</footer>
+	</div>
 </div>

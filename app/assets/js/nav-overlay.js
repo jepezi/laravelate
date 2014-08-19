@@ -79,6 +79,7 @@ nav-close-btn: X button
         var _init = false, app = { };
 
         var inner = document.getElementById('inner-wrap'),
+            overlaywrap = document.getElementById('navoverlay-wrap'),
 
             nav_open = false,
 
@@ -94,7 +95,10 @@ nav-close-btn: X button
 
             var closeNavEnd = function(e)
             {
-                if (e && e.target === inner) {
+                // if (e && e.target === inner) {
+                //     document.removeEventListener(transition_end, closeNavEnd, false);
+                // }
+                if (e && e.target === overlaywrap) {
                     document.removeEventListener(transition_end, closeNavEnd, false);
                 }
                 nav_open = false;
@@ -104,7 +108,7 @@ nav-close-btn: X button
             {
                 if (nav_open) {
                     // close navigation after transition or immediately
-                    var duration = (transition_end && transition_prop) ? parseFloat(window.getComputedStyle(inner, '')[transition_prop + 'Duration']) : 0;
+                    var duration = (transition_end && transition_prop) ? parseFloat(window.getComputedStyle(overlaywrap, '')[transition_prop + 'Duration']) : 0;
                     if (duration > 0) {
                         document.addEventListener(transition_end, closeNavEnd, false);
                     } else {

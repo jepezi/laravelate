@@ -9,7 +9,8 @@ $link-color: $brand-color;
 
 //-- others
 $background-color: white;
-$background-overlay: white;
+$background-overlay: $inuit-base-background-color;
+$background-overlay-menu: white;
 
 $overlay-link-border-color: #ddd;
 
@@ -21,7 +22,7 @@ $pad-side: $spacing-unit;
 // ---------------------------
 // Default topbar tall -------
 // ---------------------------
-$pad-tall: 20px;
+$pad-tall: 24px;
 // ---------------------------
 // ---------------------------
 
@@ -37,12 +38,13 @@ $nav-btn-height: 36px;
 // font size
 $font-size-link-overlay-1: 24px;
 $font-size-link-overlay-2: 24px;
-$font-size-link-navmain: 24px;
-$font-size-link-navsecondary: 18px;
-
+$font-size-link-navmain: 16px;
+$font-size-link-navsecondary: 13px;
 
 // time
 $howfast: 350ms;
+
+
 
 #outer-wrap {
     position: relative;
@@ -58,9 +60,16 @@ $howfast: 350ms;
     height: 100%;
 }
 
-// --------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------
+.wrapper {
+    margin-top: 3*$pad-tall + 2*$font-size-link-navmain;
+}
 
+
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// Toggle Buttons
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
 
 .close-btn {
     display: block;
@@ -119,7 +128,9 @@ $howfast: 350ms;
 // --------------------------------------------------------------------------------
 #top {
     z-index: 100;
-    position: relative;
+    position: fixed;
+    top:0;
+    width: 100%;
     color: $font-color;
     background: $background-color;
 
@@ -128,15 +139,19 @@ $howfast: 350ms;
         margin: 0 auto;
         padding: $pad-tall $pad-side-small;
         max-width: 1100px;
+
         @include media-query(lap-and-up) {
             padding: $pad-tall $pad-side;
         }
+
     }
 
     .navmain {
         display: none;
+
         @include media-query(lap-and-up) {
-            margin: 0; padding: 0 0 0 12px;
+            margin: 0;
+            padding: 0 0 0 12px;
             display: inline-block;
 
             li {
@@ -147,16 +162,22 @@ $howfast: 350ms;
                     font-size: $font-size-link-navmain;
                 }
             }
+
         }
     }
+
     .navsecondary {
         display: none;
+
         @include media-query(lap-and-up) {
-            margin: 0; padding: 0;
-            display: inline-block;
+            display: block;
+            margin: 0; 
+            padding: 0;
+
             position: absolute;
             top: $pad-tall;
             right: $pad-side;
+
             li {
                 display: inline-block;
                 padding: 0 10px;
@@ -165,6 +186,7 @@ $howfast: 350ms;
                     font-size: $font-size-link-navsecondary;
                 }
             }
+
         }
     }
 
@@ -173,7 +195,6 @@ $howfast: 350ms;
         display: inline-block;
         font-size: 30px;
         line-height: 36px;
-        // text-align: center;
         white-space: nowrap;
     }
 
@@ -189,11 +210,18 @@ $howfast: 350ms;
 
 // media query
 @include media-query(palm) {
-	$nav-off-canvas-width: 70%;
+
+    #nav {
+        .close-btn {
+            position: absolute;
+            top: $nav-btn-top;
+            right: $nav-btn-side;
+        }
+    }
 
     /*
     |--------------------------------------------------------------------------
-    | navoverlay Custom Style
+    | Nav Overlay 
     |--------------------------------------------------------------------------
     | 
     | 
@@ -203,16 +231,19 @@ $howfast: 350ms;
         padding: $overlay-pad-tall $overlay-pad-side;
         background-color: $background-overlay;
         height: 100%;
-        text-indent: $inuit-base-spacing-unit--small;
+        text-indent: $spacing-unit--small;
+        padding-top: -1*$pad-tall;
+        display: none;
     }
     .navoverlay-top {
-        
+        background-color: $background-overlay-menu;
     }
     .navoverlay-top-links {
         ul {
             margin: 0;
             padding: 0;
             list-style: none;
+
             li {
                 a {
                     display: block;
@@ -223,8 +254,12 @@ $howfast: 350ms;
         }
     }
     .navoverlay-body {
+        background-color: $background-overlay-menu;
         ul {
-            @extend %list-ui;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
             li {
                 a {
                     display: block;
@@ -239,84 +274,96 @@ $howfast: 350ms;
         }
     }
     #navoverlay footer {
-        background-color: $inuit-base-background-color;
+        background-color: $background-overlay;
         padding-top: 20px;
         font-size: .9em;
     }
-    // end navoverlay custom style
-    
-    #nav {
-        .close-btn {
-            position: absolute;
-            top: $nav-btn-top;
-            right: $nav-btn-side;
-        }
-    }
+
+    // --------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
+
+
 
 	@if ($step > 1) {
 
 	    .js-ready {
+
+            #top {
+                display: block;
+            }
 			
 			#navoverlay {
-				position: absolute;
-				left: 0;
+				position: fixed;
 				width: 100%;
+                top: 0;
+                left: -9999px;
 			}
 	        
 	    }
 
+
+        .js-nav {
+
+            #top {
+                display: none;
+            }
+
+            #navoverlay {
+                left: 0;
+                display: block;
+            }
+
+        }
+
 	} // end @if ($step > 1) 
 
-	@if ($step > 1) {
-
-	    .js-ready {
-
-	    	#top, .wrapper {
-	    		display: block;
-	    	}
-
-	        #navoverlay {
-	        	display: none;
-	        }
-	    }
-
-	    .js-nav {
-
-	    	#top, .wrapper {
-	    		display: none;
-	    	}
-
-	        #navoverlay {
-	        	display: block;
-	        }
-	    }
-
-	} // end @if ($step > 1)
 
 	@if ($step > 2) {
 
 	    .csstransforms3d.csstransitions.js-ready {
 
-	        #navoverlay {
-                display: block !important;
-                transform: scale3d(0.9,0.9,0.9);
-                // transform: translate3d(0,0,0) scale3d(0.9,0.9,0.9);
-	            // transform: translate3d(0,0,0);
+            // #top {
+            //     display: block !important;
+            //     @include opacity(1);
+            //     transition: opacity $howfast ease;
+            // }
+
+            #navoverlay {
+                left: 0 !important;
+                @include opacity(0);
+                visibility: hidden;
+                transform: translate3d(-9999px,0,0);
+                transition: opacity $howfast ease, transform $howfast ease $howfast, visibility 0s;
+            }
+
+	        .navoverlay-wrap {
+                transform: scale3d(1.1,1.1,1.1);
 	            transition: all $howfast ease;
 	            backface-visibility: hidden;
 	        }
 	    }
 
         .csstransforms3d.csstransitions.js-nav {
+
+            // #top {
+            //     @include opacity(0);
+            //     display: none;
+            // }
+
             #navoverlay {
+                @include opacity(1);
+                visibility: visible;
+                transform: translate3d(0,0,0);
+                transition: all 0 ease;
+            }
+            .navoverlay-wrap {
+                
                 transform: scale3d(1,1,1);
                 // transform: translate3d(-10%,0,0);
             }
         }
 
 	} // end @if ($step > 2)
-
-    
 
 }
 

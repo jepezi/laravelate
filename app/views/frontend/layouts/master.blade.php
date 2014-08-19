@@ -27,6 +27,7 @@
   <div id="inner-wrap">
 
   @include ('frontend.includes.navoverlay-head')
+  @include ('frontend.includes.navoverlay-overlay')
 
   <div class="wrapper">
     @include ('frontend.includes.activate')
@@ -205,7 +206,7 @@
     
     </div>
 
-@include ('frontend.includes.navoverlay-overlay')
+
 
   </div>
   <!--/#inner-wrap-->
