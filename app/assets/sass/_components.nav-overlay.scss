@@ -138,7 +138,7 @@ $howfast: 350ms;
         position: relative;
         margin: 0 auto;
         padding: $pad-tall $pad-side-small;
-        max-width: 1100px;
+        max-width: $wrapper-width;
 
         @include media-query(lap-and-up) {
             padding: $pad-tall $pad-side;
